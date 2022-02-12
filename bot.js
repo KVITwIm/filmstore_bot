@@ -2,14 +2,14 @@ const { Telegraf, Markup } = require('telegraf')
 
 const bot = new Telegraf("5240172130:AAGqQoln6Q0GyMTWcLFCp2W-3gGCjElsuKY")
 
-var searched_films = ["Детхул","бравл квасик"];
-var films = ["Кто я? - Крутейший фильм про хакера.","Гарфилд - юмористический фильм"];
+var searched_films = ["План Побега - фильм, про человека, который сбегает из тюрем за деньги.","бравл квасик"];
+var films = ["Кто я? - Крутейший фильм про хакера.","Гарфилд - юмористический фильм про кота","Кремниевая Долина - сериал, про программиста, который создал уникальный алгоритм сжатие.","Джуманджи - герои фильма попали в игру и пытаются выбраться из нее.", "План Побега - фильм про гениа"];
 
 bot.hears('Случайный Фильм', (ctx) => ctx.reply(`Ваш случайный фильм: ${films[Math.floor(Math.random() * films.length)]}`))
 
 bot.command('start', (ctx) => {
     return ctx.reply(
-      'ПРивет лилгаалала',
+      'Привет! Данный Telegram Bot поможет тебе найти новый фильм или дать названия фильма о котором мы сняли Tik-Tok!',
       Markup.keyboard([
         Markup.button.text('Случайный Фильм'),
         Markup.button.text('Поиск по номеру')
@@ -19,7 +19,11 @@ bot.command('start', (ctx) => {
 
   bot.command('search', (ctx) => {
     var num = parseInt(ctx.message.text.replace(/\D+/g,""));
-    if(num == num+1-1){
+    if(num == 0){
+      ctx.reply("Под данным номером нет фильма.")
+    } else if(num > 1){
+      ctx.reply("Под данным номером нет фильма.")
+    } else if(num == num+1-1){
       ctx.reply(searched_films[num-1]);
     } else{
       ctx.reply("Вы не написали номер! Пример: /search 10")
